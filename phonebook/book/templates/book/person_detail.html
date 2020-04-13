@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block delete_person %}
+    {% if not email_list and not number_list %}    
+        <form action="delete/">
+            <input type="submit" class='btn btn-danger' value="Usun osobe"/> 
+        </form>
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="container">
+        <br><br>
+        <center><h1>Osoba: {{ person.name }} {{ person.surname }}</h1></center>
+    </div> 
+    <div class='row'>
+        <div class='col'>
+            <span class="border">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Numery komorkowe</th>
+                            <th scope="col"></th>
+                            <th scope="col">
+                                <form action="add-number/">
+                                    <input type="submit" class="btn btn-primary" value="Dodaj telefon"/> 
+                                </form>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for number in number_list %}
+                            <tr>
+                                <td>{{ number.phone }} </td>
+                                <td>
+                                    <form action="delete-number/{{ number.id }}/" method="POST"> 
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-primary" value="Usun">
+                                    </form> 
+                                </td>
+                            </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+            </span>
+        </div>
+        <div class='col'>
+            <span class="border">
+                <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Adresy email</th>
+                        <th scope="col"></th>
+                        <th scope="col">
+                            <form action="add-email/">
+                                <input type="submit" class="btn btn-primary" value="Dodaj adres email"/> 
+                            </form>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for email in email_list %}
+                        <tr>
+                            <td>{{ email.email }}</td>
+                            <td>
+                                <form action="delete-email/{{ email.id }}/" method="POST"> 
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-primary" value="Usun">
+                                </form> 
+                            </td>
+                        </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+            </span>
+        </div>  
+    </div>
+
+{% endblock %}

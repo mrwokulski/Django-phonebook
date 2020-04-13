@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table">
+    <thead class="thead-dark">
+    {% if not person_list %}
+                <th scope="row">Twoje wyszukiwanie: {{ search_query }}</th>
+                <tr>
+                    <th scope="col">Numery/Email</th>
+                    <th scope="col">Imie</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Edytuj osobe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Nie znaleziono wynikow</th>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+                <tr>
+                    <th scope="col">Numery/Email</th>
+                    <th scope="col">Imie</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Edytuj osobe</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in person_list %}
+                    <tr>
+                        <th scope="row">
+                            <form action='{{ person.get_absolute_url }}'>
+                                <input type='submit' class="btn btn-dark" value='Numery i emaile'>
+                            </form>
+                        </th>
+                        <td>{{ person.surname }}</td>
+                        <td>{{ person.name }}</td>
+                        <td>
+                            <form action="{{ person.get_absolute_url }}update/">
+                                <input type="submit" class="btn btn-dark" value="Edytuj osobe"/> 
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

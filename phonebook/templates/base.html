@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+        <title> Twoja ksiazka telefoniczna </title>
+          <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">Ksiazka telefoniczna | Parleto</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link">
+                <form action='../../'>
+                    <input type='submit' class="btn btn-info" value='Powrot do strony glownej'>
+                </form>
+                 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link">
+                    <form action="../../create/">
+                        <input type="submit" class="btn btn-primary" value="Dodaj nowa osobe" />
+                    </form>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link">
+                    {% block delete_person %}
+                    {% endblock %}
+                </a>
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="../../search/" type="GET">
+                <input type="text" placeholder="Wyszukiwarka" name="search" aria-label="search"/>
+                <button class="btn btn-success" type="submit">Zatwierdz</button>
+            </form>
+        </div>
+        </nav>
+        <div class="container">
+            {% block content %}
+                To be replaced.
+            {% endblock %}
+        </div>
+    </body>
+</html>

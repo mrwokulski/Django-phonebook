@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <form method='POST'>
+        <br><br>
+        <h4>Zmieniasz dane:</h4> {{ person }}
+        <br><br>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type='submit' class="btn btn-primary" value='Zatwierdz zmiany'>
+        <a class="btn btn-danger" href='../'>Anuluj</a>
+    </form>
+
+{% endblock %}
